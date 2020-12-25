@@ -17,7 +17,7 @@ from nltk.stem.porter import PorterStemmer
 ps = PorterStemmer()
 corpus = []
 for i in range(0, len(messages)):
-    review = re.sub('[^a-zA-Z]', ' ', messages['message'][i])
+    review = re.sub('[^a-zA-Z]', ' ', messages['message'][i]) #we are reading only the message content. spam/ham is not read for this
     review = review.lower()
     review = review.split()
 
@@ -29,10 +29,11 @@ for i in range(0, len(messages)):
 from sklearn.feature_extraction.text import CountVectorizer
 
 cv = CountVectorizer(max_features=2500)
-X = cv.fit_transform(corpus).toarray()
+X = cv.fit_transform(corpus).toarray() #array of sentences -features of the messages BOW
 
-y = pd.get_dummies(messages['label'])
-y = y.iloc[:, 1].values
+y = pd.get_dummies(messages['label'])#this is to rplace the ham and spam values to 0 and 1 for machine to understand. We just created this colums as a dummy.
+
+y = y.iloc[:, 1].values #take the values from only one column as the other will be redundant.
 
 # Train Test Split
 
