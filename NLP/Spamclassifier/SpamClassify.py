@@ -48,3 +48,11 @@ from sklearn.naive_bayes import MultinomialNB
 spam_detect_model = MultinomialNB().fit(X_train, y_train)
 
 y_pred = spam_detect_model.predict(X_test)
+
+#evaluate the accuracy of prediction
+#confusion matrix
+from sklearn.metrics import confusion_matrix
+confusion_mtrx=confusion_matrix(y_test,y_pred)
+#accurace score details
+from sklearn.metrics import accuracy_score
+accuracy_scr=accuracy_score(y_test,y_pred)
